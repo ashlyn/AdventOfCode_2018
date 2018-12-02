@@ -37,8 +37,25 @@ namespace AdventOfCode_2018
           throw new InvalidOperationException($"No solver implemented for Day {day} yet.");
         }
 
-        var output = solver.Solve();
-        Console.WriteLine($"Output: {output}");
+        if (args.Length < 2)
+        {
+          Console.WriteLine($"Day {day} Part 1 Output: {solver.SolvePart1()}");
+          Console.WriteLine($"Day {day} Part 2 Output: {solver.SolvePart2()}");
+        }
+        else
+        {
+          var partArgument = args[1];
+          var partIsInt = int.TryParse(partArgument, out int part);
+
+          if (!isInt || part < 1 || part > 2)
+          {
+            throw new InvalidOperationException($"Invalid part input {part}");
+          }
+
+
+          var output = part == 1 ? solver.SolvePart1() : solver.SolvePart2();
+          Console.WriteLine($"Day {day} Part {part} Output: {output}");
+        }
       }
       catch (Exception e)
       {

@@ -1,4 +1,5 @@
 public interface ISolver
 {
-  string Solve();
+  string SolvePart1();
+  string SolvePart2();
 }
