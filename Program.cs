@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace AdventOfCode_2018
+{
+  class Program
+  {
+
+    private static Dictionary<int, ISolver> SolverDictionary = new Dictionary<int, ISolver>();
+
+    private static void SetupSolvers()
+    {
+      SolverDictionary.Add(1, new Day1Solver());
+    }
+
+    static void Main(string[] args)
+    {
+      SetupSolvers();
+      try
+      {
+        if (args.Length < 1)
+        {
+          throw new InvalidOperationException("No day argument provided.");
+        }
+
+        var dayArgument = args[0];
+        var isInt = int.TryParse(dayArgument, out int day);
+
+        if (!isInt || day < 1 || day > 25)
+        {
+          throw new InvalidOperationException($"Invalid day input {dayArgument}");
+        }
+
+        var hasSolver = SolverDictionary.TryGetValue(day, out ISolver solver);
+        if (!hasSolver)
+        {
+          throw new InvalidOperationException($"No solver implemented for Day {day} yet.");
+        }
+
+        var output = solver.Solve();
+        Console.WriteLine($"Output: {output}");
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e.Message);
+      }
+    }
+  }
+}
