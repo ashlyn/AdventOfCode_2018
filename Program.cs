@@ -12,6 +12,7 @@ namespace AdventOfCode_2018
     {
       SolverDictionary.Add(1, new Day1Solver());
       SolverDictionary.Add(2, new Day2Solver());
+      SolverDictionary.Add(3, new Day3Solver());
     }
 
     static void Main(string[] args)
